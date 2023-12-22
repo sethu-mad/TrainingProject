@@ -1,0 +1,11 @@
+<template>
+    <lightning-tabset>
+        <lightning-tab label="Contact">
+        <c-related-contact account-id={accountId}></c-related-contact>
+        </lightning-tab>
+        <lightning-tab label="Opportunity">
+        <c-related-opportunity account-id={accountId}></c-related-opportunity>
+        </lightning-tab>
+    <div>{accountId}</div>
+    </lightning-tabset>
+</template>

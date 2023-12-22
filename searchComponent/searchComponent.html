@@ -1,0 +1,6 @@
+<template>
+    <lightning-input label="Enter Account Name" onkeyup={handleInputChange}></lightning-input>
+        <div>{recordName}</div>
+        <c-search-result if:true={showSearchResult} account-name={accountName} onrecordselect={handleRecordSelect}></c-search-result>
+        <!--<c-related selected-account={selectedAccountId}></c-related>-->
+</template>

@@ -1,0 +1,13 @@
+<template>
+    <lightning-datatable
+    if:true={accountRecords}
+    key-field="Id"
+    data={accountRecords}
+    columns={columns}
+    enable-infinite-loading
+    max-row-selection="1"
+    onrowselection={handleRowSelection}
+    onsave={saveAction}
+    draft-values={fieldsItemValues}>
+    </lightning-datatable>
+</template>
