@@ -1,26 +1,26 @@
 <template>
-    <lightning-card>
-    <lightning-record-edit-form object-api-name={objectName} >
-        <lightning-layout multiple-rows>
-            <lightning-layout-item size="12">
-                <lightning-messages></lightning-messages></lightning-layout-item>
-            <lightning-layout-item size="12">
-                <lightning-input-field field-name="AccountId" value={accountId}>
-                </lightning-input-field>
-            </lightning-layout-item>
-            <lightning-layout-item size="12">
-                <lightning-input-field field-name={firstName} required></lightning-input-field>
-            </lightning-layout-item>
-            <lightning-layout-item size="12">
-                <lightning-input-field field-name={lastName} required></lightning-input-field>
-            </lightning-layout-item>
-            <lightning-layout-item size="12">
-                <lightning-input-field field-name={email} type="email" required></lightning-input-field>
-            </lightning-layout-item>
-            <lightning-layout-item size="12">
-                <lightning-button class="slds-m-top_small" type="Submit" label="Create Contact" name="save" variant="brand" onclick={handleSubmit}></lightning-button>
-            </lightning-layout-item>
-        </lightning-layout>
+    <lightning-record-edit-form
+        object-api-name="Contact"
+        onsuccess={handleSuccess}
+    >
+        <lightning-messages></lightning-messages>
+        <div class="slds-m-around_medium">
+            <lightning-input-field
+                field-name="AccountId"
+                value={accountId}
+            ></lightning-input-field>
+            <lightning-input-field field-name="Name"></lightning-input-field>
+            <lightning-input-field field-name="Email"></lightning-input-field>
+            <lightning-input-field field-name="Phone"></lightning-input-field>
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    variant="brand"
+                    type="submit"
+                    name="save"
+                    label="Create Account"
+                >
+                </lightning-button>
+            </div>
+        </div>
     </lightning-record-edit-form>
-    </lightning-card>
 </template>
