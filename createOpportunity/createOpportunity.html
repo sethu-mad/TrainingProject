@@ -1,15 +1,15 @@
 <template>
     <lightning-card>
-        <div class="slds-p-around_medium">
-            <lightning-input
+        <lightning-input
                 label="Account Name"
                 field-name="AccountId"
                 value={accountId}
                 disabled
             ></lightning-input>
+        <div class="slds-p-around_medium">
             <lightning-input label="Opportunity Name" value={opportunityName} onchange={handleNameChange}></lightning-input>
             <lightning-input label="Close Date" type="Date" value={closeDate} onchange={handleDateChange}></lightning-input>
-            <lightning-combobox options={stageOptions} value={stage} onchange={handleStageChange}></lightning-combobox>
+            <lightning-combobox label="Stage Name" options={stageOptions} value={stage} onchange={handleStageChange}></lightning-combobox>
             <lightning-button label="Create Opportunities" onclick={handleClick}></lightning-button>
         </div>
     </lightning-card>
