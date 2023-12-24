@@ -1,6 +1,7 @@
 <template>
-    <lightning-datatable data={opportunities} columns={columns} key-field="Id" onrowaction={handleRowSelection}></lightning-datatable>
-
+    <!--the below datatable displayes the opportunity related to chosen account-->
+    <lightning-datatable hide-checkbox-column="true" data={opportunities} columns={columns} key-field="Id" onrowaction={handleRowSelection}></lightning-datatable>
+    <!--the below template pop-up the viewOpportunity component with chosen opportunity details-->
     <template if:true={opportunityChosed}>
         <section class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container">
@@ -9,9 +10,9 @@
                     <lightning-button icon-name="utility:close" variant="inverse" onclick={closeModalAction}></lightning-button>
                     </button>
                     <h2 class="slds-text-heading_medium">Opportunity Record Detail</h2>
-                    
                 </header>
                 <div class="slds-modal__content slds-p-around-medium">
+                    <!--Here we call the viewOpportunity and pass the opportunityId-->
                     <c-view-opportunity opp-id={selectedOppId}></c-view-opportunity>
                 </div>  
                 <footer class="slds-modal__footer">
@@ -20,5 +21,25 @@
             </div>
         </section>
         </template>
-
+        <lightning-button label="Create Opportunity" onclick={createOpp}></lightning-button>
+        <!--the below template pop-up the createOpportunity component to create new Opportunity for the chosen account-->
+        <template if:true={callOpp}>
+            <section class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                        <lightning-button icon-name="utility:close" variant="inverse" onclick={closeModalAction}></lightning-button>
+                        </button>
+                        <h2 class="slds-text-heading_medium">Opportunity Record Detail</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around-medium">
+                        <!--Here we call the createOpportunity and pass the accountId-->
+                        <c-create-opportunity account-id={accountId}></c-create-opportunity>
+                    </div>  
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="close" onclick={closeModalAction}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            </template>
 </template>
