@@ -4,16 +4,16 @@ import { CurrentPageReference } from 'lightning/navigation';
 export default class RelatedContact extends LightningElement {
     
     @api accountId = '';
-    
+    @track callContact = false;
     @track contacts = [];
-    @track contactRow = {};
-    @track selectedRows = [];
     selectedContact;
-    @track contactDetails = [];
     @track contactChosed = false;
     @wire(CurrentPageReference) pageRef;
+    //declares whatever colums we need in datatable 
     columns = [
-        {label : 'View', type : 'button-icon', initialWidth : 50, typeAttributes : {
+        {
+            //the below lable is the eye icon
+            label : 'View', type : 'button-icon', initialWidth : 50, typeAttributes : {
             iconName : 'action:preview',
             title : 'Preview',
             variant : 'border-filled',
@@ -37,10 +37,14 @@ export default class RelatedContact extends LightningElement {
     handleRowAction(event){
         const dataRow = event.detail.row.Id;
         console.log(dataRow);
-        this.selectedContact = dataRow;
+        this.selectedContact = dataRow;//stores the chosen contactId
         this.contactChosed = true;
     }
     closeModalAction(){
         this.contactChosed=false;
+        this.callContact = false;
+    }
+    createContact(){
+        this.callContact = true;
     }
 }
