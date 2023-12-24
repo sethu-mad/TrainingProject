@@ -1,5 +1,7 @@
 <template>
+    <!--the below lightning-datatable displayes the relatedContacts-->
     <lightning-datatable hide-checkbox-column="true" data={contacts} columns={columns} key-field="Id" onrowaction={handleRowAction}></lightning-datatable>
+    <!--The below template opens a pop-up can displays the contact details by calling viewContact-->
     <template if:true={contactChosed}>
     <section class="slds-modal slds-fade-in-open">
         <div class="slds-modal__container">
@@ -11,6 +13,7 @@
                 <h2>{selectedcontact}</h2>
             </header>
             <div class="slds-modal__content slds-p-around-medium">
+                <!--This calls the viewContact component and pass the contactId-->
                 <c-view-contact contact-id={selectedContact}></c-view-contact>
             </div>  
             <footer class="slds-modal__footer">
@@ -18,5 +21,27 @@
             </footer>
         </div>
     </section>
+    </template>
+    <lightning-button label="Create Contact" onclick={createContact}></lightning-button>
+    <!--The below template opens a pop-up and create contact page calling createContact-->
+    <template if:true={callContact}>
+        <section class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <lightning-button icon-name="utility:close" variant="inverse" onclick={closeModalAction}></lightning-button>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Create Contact</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around-medium">
+                    <!--This calls the createContact component and pass the accounttId-->
+                    <c-create-contact account-id={accountId}></c-create-contact>
+                    <div>{accountId}</div>
+                </div>  
+                <footer class="slds-modal__footer">
+                    <lightning-button label="close" onclick={closeModalAction}></lightning-button>
+                </footer>
+            </div>
+        </section>
     </template>
 </template>
