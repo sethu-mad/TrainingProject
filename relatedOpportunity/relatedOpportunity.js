@@ -4,11 +4,11 @@ import getOpportunity from '@salesforce/apex/OpportunityController.getOpportunit
 
 export default class RelatedOpportunity extends LightningElement {
     @api accountId = '';
-   // @track opportunities = [];
    opportunities;
+   @track callOpp = false;
    @track opportunityChosed = false;
-    @track selectedRows = [];
     selectedOppId;
+    
     columns = [
         {label : 'View', type : 'button-icon', initialWidth : 50, typeAttributes : {
             iconName : 'action:preview',
@@ -29,6 +29,7 @@ export default class RelatedOpportunity extends LightningElement {
         if(data){
             this.opportunities = data;
             this.opportunities = data.map(opportunity => {
+                //in the below method we're checking for some condition and displaying icon
                 let icon;
                 const createdDate = new Date(opportunity.CreatedDate);
                 const currentDate = new Date();
@@ -53,11 +54,16 @@ export default class RelatedOpportunity extends LightningElement {
         }
     }
     handleRowSelection(event){
+        //storing the selected opportunity Id
         const dataRow = event.detail.row.Id;
         this.selectedOppId = dataRow;
         this.opportunityChosed = true;
     }
     closeModalAction(){
         this.opportunityChosed=false;
+        this.callOpp = false;
+    }
+    createOpp(){
+        this.callOpp = true;
     }
 }
