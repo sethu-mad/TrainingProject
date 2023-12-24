@@ -7,7 +7,9 @@
     enable-infinite-loading
     max-row-selection="1"
     onrowselection={handleRowSelection}
-    onsave={saveAction}
-    draft-values={fieldsItemValues}>
+    onsave={handleSave}
+    draft-values={draftValues}
+    is-loading={isLoadingData}
+    oncellchange={handleChange}>
     </lightning-datatable>
 </template>
