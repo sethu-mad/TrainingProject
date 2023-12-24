@@ -47,7 +47,7 @@ export default class SearchResult extends LightningElement {
         this.selectedRow = selectRows[0].Name;//this store only the selected account Name
         this.getAccId = selectRows[0].Id;//this store only the selected account Id
         console.log('selected Row: ' +this.selectedRow);
-//using this below custom event we are passing the chosen account name to search component to display over there
+        //using this below custom event we are passing the chosen account name to search component to display over there
             const selectEvent = new CustomEvent('recordselect', {
                 detail : {
                     selectedRecordName : this.selectedRow,
@@ -96,7 +96,7 @@ export default class SearchResult extends LightningElement {
                 variant : 'success'
              }),
              );
-             this.draftValues = [];//this nulls the drafvalues on successfull edit/save
+            //  this.draftValues = [];//this nulls the drafvalues on successfull edit/save
         });
     await refreshApex(this.accountRecords);//this removes the save button after successfull save
     }
