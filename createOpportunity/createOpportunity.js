@@ -39,11 +39,12 @@ export default class CreateContact extends LightningElement {
                 AccountId: this.accountId
             }
         };
+        //the below function creates the opportunity with the chosen accountId
         createRecord(recordInput).then((record)=>{
             console.log('Opportunity Created: ', record);
             const evt = new ShowToastEvent({
                 title : 'Contact Created',
-                message : 'Record Id: ',
+                message : 'Record Id: ' +record.Name,
                 variant : 'success'
             });
             this.dispatchEvent(evt);
