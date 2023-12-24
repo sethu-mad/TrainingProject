@@ -1,38 +1,31 @@
 import { LightningElement, api, wire, track } from 'lwc';
-import getSelectedContacts from '@salesforce/apex/ContactController.getSelectedContacts';
+
+import NAME from '@salesforce/schema/Contact.Name';
+import ACCOUNTID from '@salesforce/schema/Contact.AccountId';
+import PHONE from '@salesforce/schema/Contact.Phone';
+import EMAIL from '@salesforce/schema/Contact.Email';
+import TITLE from '@salesforce/schema/Contact.Title';
+import MOBILE from '@salesforce/schema/Contact.MobilePhone';
+import MAILING from '@salesforce/schema/Contact.MailingAddress';
+import OTHER from '@salesforce/schema/Contact.OtherAddress';
+import LANGUAGE from '@salesforce/schema/Contact.Languages__c';
+import LEVEL from '@salesforce/schema/Contact.Level__c';
+
 export default class ViewContact extends LightningElement {
-    @api contactId = '';
+    @api contactId = '';//holds the contactId passed from relatedContact
     @api contacts = [];
     contactRecords = [];
-    @track contactChosed = false;
+    //storing the fields to display in the form
+    fields = [NAME, ACCOUNTID, PHONE, EMAIL, TITLE, MOBILE, MAILING, OTHER, LANGUAGE, LEVEL];
+
     @api Name;
     @api Email;
     @api Phone;
     @api Title;
 
     connectedCallback(){
+        //checking for the contactId
         console.log('This message is dislayed in connectedCall back' + this.contactId);
     }
 
-    closeModalAction(){
-        this.contactChosed=false;
-    }
-
-    @wire(getSelectedContacts, {contactId : '$contactId'})
-    wiredContacts({error, data}){
-        if(data){
-            this.contactRecords = data;
-            this.Name = this.contactRecords[0].Name;
-            this.Email = this.contactRecords[0].Email;
-            this.Phone = this.contactRecords[0].Phone;
-            this.Title = this.contactRecords[0].Title;
-            console.log('displayed inside wire' + this.contactId);
-            console.log(this.contactRecords);
-            console.log('Name: '+this.Name);
-        }else if(error){
-            this.error = error;
-            this.contactRecords = '';  
-            console.log(error);
-        }
-    };
 }
