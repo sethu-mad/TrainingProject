@@ -1,20 +1,9 @@
 <template>
-    <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_cell-buffer">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Title</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td data-label="Name">{Name}</td>
-                <td data-label="Email">{Email}</td>
-                <td data-label="Phone">{Phone}</td>
-                <td data-label="Title">{Title}</td>
-            </tr>
-        </tbody>
-    </table>
+        <lightning-record-form
+            record-id={contactId}
+            object-api-name="Contact"
+            fields={fields}
+            columns="2"
+            mode="view">
+        </lightning-record-form>
 </template>
