@@ -1,33 +1,28 @@
 import { LightningElement, api, wire, track } from 'lwc';
-import getSelectedOpps from '@salesforce/apex/OpportunityController.getSelectedOpps';
-export default class ViewContact extends LightningElement {
-    @api oppId = '';
-    @api contacts = [];
-    oppRecords = [];
-    @track contactChosed = false;
-    @api Name;
-    @api Stage;
-    @api Phone;
-    @api Title;
+import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import ACCOUNT_NAME from '@salesforce/schema/Opportunity.Name';
+import CONTACT from '@salesforce/schema/Opportunity.Contact__c';
+import AMOUNT from '@salesforce/schema/Opportunity.Amount';
+import CLOSE_DATE from '@salesforce/schema/Opportunity.CloseDate';
 
-    connectedCallback(){
-        console.log('This message is dislayed in connectedCall back' + this.oppId);
+export default class ViewOpportunity extends LightningElement {
+    @api oppId = '';//holds the chosen opportunity ID
+    @wire(getRecord, {
+        recordId : '$oppId',//assign it to the recordId
+        fields: [ACCOUNT_NAME, CONTACT, AMOUNT, CLOSE_DATE]
+    })
+    opportunity;
+    //storing the values for the chosen oppId and passing to HTML
+    get accountName(){
+        return getFieldValue(this.opportunity.data, ACCOUNT_NAME);
     }
-
-    @wire(getSelectedOpps, {oppId : '$oppId'})
-    wiredContacts({error, data}){
-        if(data){
-            this.oppRecords = data;
-            this.Name = this.oppRecords[0].Name;
-            this.Stage = this.oppRecords[0].StageName;
-    
-            console.log('displayed inside wire' + this.oppId);
-            console.log(this.oppRecords);
-            console.log('Name: '+this.Name);
-        }else if(error){
-            this.error = error;
-            this.contactRecords = '';  
-            console.log(error);
-        }
-    };
+    get contact(){
+        return getFieldValue(this.opportunity.data, CONTACT);
+    }
+    get amount(){
+        return getFieldValue(this.opportunity.data, AMOUNT);
+    }
+    get closeDate(){
+        return getFieldValue(this.opportunity.data, CLOSE_DATE);
+    }
 }
