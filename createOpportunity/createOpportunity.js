@@ -2,7 +2,7 @@ import { LightningElement,api,track,wire} from 'lwc';
 import { createRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
-export default class CreateContact extends LightningElement {
+export default class CreateOpportunity extends LightningElement {
     @api accountId;
     @api accId;
     stageOptions = [
