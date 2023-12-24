@@ -2,8 +2,7 @@ import { LightningElement, api } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class createRecordForm extends LightningElement {
-    @api accountId;
-    contactId;
+    contactId;//stores the contactId from relatedContact
     //hierarchy of functions is if onclick is mentioned in submit button that is executed first, then submit -> success or error
     handleSuccess(event) {
         const recordId = event.detail.id;
@@ -13,6 +12,7 @@ export default class createRecordForm extends LightningElement {
             variant : 'success'
         });
         this.dispatchEvent(evt);
-    }
 
+        window.location.reload();//reloads the page on successful creation
+    }
 }
